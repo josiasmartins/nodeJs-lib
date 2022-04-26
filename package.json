@@ -12,5 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^5.0.1"
+  },
+  "engines": {
+    "node": "16.14.2"
   }
 }
