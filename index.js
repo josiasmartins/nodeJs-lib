@@ -16,17 +16,31 @@ function trataErro(erro) {
     throw new Error(chalk.red(erro.code, 'não há arquivo no caminho'))
 }
 
-function pegaArquivo(caminhoDoArquivo) {
+// async await
+async function pegaArquivo(caminhoDoArquivo) {
     const encoding = 'utf-8';
-    // fs.promise: espera receber a resposta
-    fs.promises
-    .readFile(caminhoDoArquivo, encoding)
-    // then: então faça alguma coisa
-    // recebe o produto da promesa
-    .then((texto) => chalk.green(console.log(texto)))
-    // catch: pega um erro, caso ocorra
-    .catch((erro) => trataErro(erro))
+    // try: tentar;
+    try {
+        // await: esperar a resposta
+        const texto = await fs.promises.readFile(caminhoDoArquivo, encoding);
+        console.log(chalk.green(texto));
+        // catch: pega o erro
+    } catch(erro) {
+        trataErro(erro);
+    }
 }
+
+// function pegaArquivo(caminhoDoArquivo) {
+//     const encoding = 'utf-8';
+//     // fs.promise: espera receber a resposta
+//     fs.promises
+//     .readFile(caminhoDoArquivo, encoding)
+//     // then: então faça alguma coisa
+//     // recebe o produto da promesa
+//     .then((texto) => chalk.green(console.log(texto)))
+//     // catch: pega um erro, caso ocorra
+//     .catch((erro) => trataErro(erro))
+// }
 
 // function pegaArquivo(caminhoDoArquivo) {
 //     const encoding = 'utf-8'
