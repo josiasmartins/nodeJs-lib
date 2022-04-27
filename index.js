@@ -1,7 +1,20 @@
 import chalk from 'chalk';
 // fs(file system): biblioteca nativa do nodejs
 import fs from 'fs';
-import { text } from 'stream/consumers';
+
+function extraiLinks(texto) {
+    // gm: global e multlinha
+    const regex = /\[([^\]]*)\]\((https?:\/\/[^$#\s].[^\s]*)\)/gm;
+    const arrayResultados = [];
+    let temp;
+    while ((temp = regex.exec(texto)) !== null) {
+        arrayResultados.push({ [temp[1]]: temp[2] })
+    }
+    // /\[([^\]]*)\]\((https?:\/\/[^$#\s].[^\s]*)\)/gm;
+    // const linksExtraidos = texto.match(regex);
+    // const linksExtraidos = regex.exec(texto)
+    return arrayResultados;
+}
 
 // console.log(chalk.blue("vamos começar!"));
 
@@ -23,7 +36,7 @@ async function pegaArquivo(caminhoDoArquivo) {
     try {
         // await: esperar a resposta
         const texto = await fs.promises.readFile(caminhoDoArquivo, encoding);
-        console.log(chalk.green(texto));
+        console.log(extraiLinks(texto));
         // catch: pega o erro
     } catch(erro) {
         trataErro(erro);
@@ -54,5 +67,6 @@ async function pegaArquivo(caminhoDoArquivo) {
 // }
 
 // console.log(texto(paragrafo));
-pegaArquivo('./arquivos/')
+pegaArquivo('./arquivos/texto1.md')
 // console.log(pegaArquivo('./arquivos/texto1.md'));
+
