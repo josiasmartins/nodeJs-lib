@@ -15,7 +15,7 @@ function extraiLinks(texto) {
     // match: método para trazer resultado;
     // const linksExtraidos = texto.match(regex);
     // const linksExtraidos = regex.exec(texto)
-    return arrayResultados;
+    return arrayResultados.length === 0 ? 'não há links' : arrayResultados;
 }
 
 // console.log(chalk.blue("vamos começar!"));
@@ -38,7 +38,7 @@ export default async function pegaArquivo(caminhoDoArquivo) {
     try {
         // await: esperar a resposta
         const texto = await fs.promises.readFile(caminhoDoArquivo, encoding);
-        console.log(extraiLinks(texto));
+        return extraiLinks(texto);
         // catch: pega o erro
     } catch(erro) {
         trataErro(erro);
