@@ -7,13 +7,15 @@ function extraiLinks(texto) {
     const regex = /\[([^\]]*)\]\((https?:\/\/[^$#\s].[^\s]*)\)/gm;
     const arrayResultados = [];
     let temp;
+    // exec: método para trazer o resultado
     while ((temp = regex.exec(texto)) !== null) {
         arrayResultados.push({ [temp[1]]: temp[2] })
     }
     // /\[([^\]]*)\]\((https?:\/\/[^$#\s].[^\s]*)\)/gm;
+    // match: método para trazer resultado;
     // const linksExtraidos = texto.match(regex);
     // const linksExtraidos = regex.exec(texto)
-    return arrayResultados;
+    return arrayResultados.length === 0 ? 'não há links' : arrayResultados;
 }
 
 // console.log(chalk.blue("vamos começar!"));
@@ -30,13 +32,13 @@ function trataErro(erro) {
 }
 
 // async await
-async function pegaArquivo(caminhoDoArquivo) {
+export default async function pegaArquivo(caminhoDoArquivo) {
     const encoding = 'utf-8';
     // try: tentar;
     try {
         // await: esperar a resposta
         const texto = await fs.promises.readFile(caminhoDoArquivo, encoding);
-        console.log(extraiLinks(texto));
+        return extraiLinks(texto);
         // catch: pega o erro
     } catch(erro) {
         trataErro(erro);
@@ -67,6 +69,6 @@ async function pegaArquivo(caminhoDoArquivo) {
 // }
 
 // console.log(texto(paragrafo));
-pegaArquivo('./arquivos/texto1.md')
+// pegaArquivo('./arquivos/texto1.md')
 // console.log(pegaArquivo('./arquivos/texto1.md'));
 
