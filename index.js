@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+// import chalk from 'chalk';
 // fs(file system): biblioteca nativa do nodejs
 import fs from 'fs';
 
@@ -28,7 +28,7 @@ function texto(string) {
 
 function trataErro(erro) {
     // throw: jogar/lançar;
-    throw new Error(chalk.red(erro.code, 'não há arquivo no caminho'))
+    throw new Error(erro.code, 'não há arquivo no caminho')
 }
 
 // async await
