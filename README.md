@@ -1,4 +1,5 @@
-# NodeJs - first lib verify urld valid
+# NodeJs - first lib
+- verify if URLs is valid in site
 
 ## building 
 - javascript 
