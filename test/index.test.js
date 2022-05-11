@@ -19,4 +19,8 @@ describe('pegaArquivo', () => {
         const resultado = await pegaArquivo("./arquivos/texto1.md").
         expect(resultado).toBe(arrayResult)
     })
+    it("deve retornar a message 'não há links'", async () => {
+        const resultado = await pegaArquivo('./arquivos/texto1-semlink.md');
+        expect(resultado).toBe('não há links')
+    })
 })
